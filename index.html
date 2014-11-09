@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app='theApp'>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js"></script>
+</head>
+
+<body ng-controller='theCtrl'>
+  <h1>Fidgeting writer stats</h1>
+  Enter the probabilities to successfully convert each of the following:
+  <ul>
+    <li ng-repeat='item in conversions'>{{item.convertFrom}}:
+      <input type='number' ng-min='0' ng-max='1' ng-model='item.probability' step='0.01' class='probability'>
+    </li>
+  </ul>
+
+  <hr>Converting up to a
+  <select ng-model='stopItem' ng-options='item.convertTo for item in conversions'>
+  </select>
+  <ul>
+  <li>The probability of success for converting from one <em>Tale of Terror</em>: <b>{{(100*stopItem.cumProb).toFixed(1)}}%</b></li>
+  <li>The expected number of actions spent per <em>Tale of Terror</em>: <b>{{stopItem.expectedActionsToSell.toFixed(2)}}</b></li>
+  <li>The expected pence per action: <b>{{stopItem.expectedPPA.toFixed(1)}}</b></li>
+  </ul>
+  <br><hr>
+
+  <h2>Simulations</h2>
+  Simulate <input type='number' ng-min='1' ng-max='10000' ng-model='numSimTrials'> trials, each consisting of <input type='number' ng-min='1' ng-max='10000' ng-model='numSimTales'> <em>Tale of Terror</em> conversions.
+  <br> Number of bins: <input type='number' ng-min='5' ng-max='300' ng-model='numBins'>
+  <button ng-click='runSimulation()'>Go!</button><br>
+
+  <p>
+  The following histograms show the probability of getting different results for a given number of conversions. The lines show the cumulative distribution.
+  </p>
+
+  <p><em>{{simText}}</em></p>
+  
+  <br><svg a-histogram data='binnedActions' class='binnedActions' xtitle='Actions to convert {{numSimTales}} Tales'></svg>
+  <svg a-histogram data='binnedPPA' class='binnedPPA' xtitle='Pence Per Action'></svg>
+  <svg a-histogram data='binnedProfits' class='binnedProfits' xtitle='Total profit (echoes)'></svg>
+
+
+</body>
+
+</html>

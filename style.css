@@ -1,0 +1,40 @@
+/* Styles go here */
+
+input {
+  width: 70px;
+}
+input.probability {
+  width: 50px;
+}
+.axis {
+  font: 10px sans-serif;
+}
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+  stroke-width: 2;
+}
+.axis.cmf path, .axis.cmf line {
+  stroke: #a00;
+}
+path.cmf {
+  stroke-width: 2;
+  stroke: #a00;
+  fill: none;
+}
+circle.cmf {
+  stroke: none;
+  fill: #a00;
+}
+.y.axis path, .y.axis line {
+  stroke: #33c;
+}
+.bar {
+  fill: #55f;
+  stroke: #fff;
+  stroke-width: 1;
+}
+svg {
+  background: #ccc;
+}
