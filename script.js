@@ -247,6 +247,7 @@ theApp.directive('aHistogram', function() {
           }).attr('height', function(d) {
             return yScale(0) - yScale(d.count / totalCount);
           });
+          bar.exit().remove();
 
           var pathgen = d3.svg.line()
             .interpolate('linear')
@@ -267,6 +268,7 @@ theApp.directive('aHistogram', function() {
           }).attr('cy', function(d) {
             return yScale2(d.count / totalCount);
           });
+          circs.exit().remove();
         } else {
           content.selectAll('.bar').remove();
           content.selectAll('path.cmf').remove();
